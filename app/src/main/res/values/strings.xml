@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PregoAdminApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_topping">Add New Topping</string>
+    <string name="title_activity_show_pizza_menu">Pizza Manu</string>
+    <string name="title_activity_topping_list">List of Toppings</string>
+    <string name="title_activity_pizza_list">Pizza Menu</string>
+    <string name="title_activity_add_pizza">Add New Pizza</string>
+    <string name="title_activity_add_order">Add a New Order</string>
+    <string name="title_activity_update_pizza">Updating a Pizza</string>
+    <string name="title_activity_update_order">Update Order</string>
+    <string name="order_status">Order Status:</string>
+    <string name="textview">TextView</string>
+    <string name="update_status">update Status</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="datereceived">dateReceived</string>
+    <string name="timereceived">timeReceived</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="total">Total €</string>
+    <string name="name">Name:</string>
+</resources>

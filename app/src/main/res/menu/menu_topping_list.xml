@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.damian.pregoadminapp.orderList">
+
+    <item
+        android:id="@+id/pizzaListMenu"
+        android:orderInCategory="100"
+        android:title="List of Pizzas"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/orderListMenu"
+        android:orderInCategory="100"
+        android:title="List of Orders"
+        app:showAsAction="never"/>
+</menu>

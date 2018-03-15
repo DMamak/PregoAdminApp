@@ -1,0 +1,79 @@
+package com.damian.pregoadminapp.Models;
+
+import android.widget.ArrayAdapter;
+
+import java.util.List;
+
+/**
+ * Created by damia on 08/03/2018.
+ */
+
+public class Pizza {
+    public Long id =0L;
+    public static Long counter =0L;
+    private String name;
+    private String size;
+    private double price;
+    private List<Topping> toppings;
+
+    public Pizza(String name, String size ,double price,List<Topping> toppings) {
+        this.id = counter++;
+        this.name = name;
+        this.size = size;
+        this.price = price;
+        this.toppings=toppings;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public static Long getCounter() {
+        return counter;
+    }
+
+    public static void setCounter(Long counter) {
+        Pizza.counter = counter;
+    }
+}
