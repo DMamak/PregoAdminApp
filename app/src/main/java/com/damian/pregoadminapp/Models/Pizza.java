@@ -10,18 +10,22 @@ import java.util.List;
 
 public class Pizza {
     public Long id =0L;
-    public static Long counter =0L;
+    private static Long counter =0L;
     private String name;
     private String size;
     private double price;
     private List<Topping> toppings;
+    private String image;
 
-    public Pizza(String name, String size ,double price,List<Topping> toppings) {
+    public Pizza(){}
+
+    public Pizza(String name, String size ,double price,List<Topping> toppings,String image) {
         this.id = counter++;
         this.name = name;
         this.size = size;
         this.price = price;
         this.toppings=toppings;
+        this.image = image;
     }
 
     public Long getId() {

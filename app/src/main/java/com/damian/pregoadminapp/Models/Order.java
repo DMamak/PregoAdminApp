@@ -8,13 +8,15 @@ import java.util.List;
 
 public class Order {
     public Long id = 0L;
-    public static Long counter =0L;
+    private static Long counter =0L;
     private String dateReceived;
     private String timeReceived;
     private String option;
     private String paymentMethod;
     private List<Pizza> pizzas;
     private String status;
+
+    public Order(){}
 
     public Order(String dateReceived, String timeReceived, String option, String paymentMethod,List<Pizza>pizzas) {
         this.id = counter++;

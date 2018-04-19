@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Pizza;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,8 @@ public class updateOrder extends AppCompatActivity {
     String[] states;
     TextView totalPrice;
     TextView heading;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mDataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,9 @@ public class updateOrder extends AppCompatActivity {
         heading.setText("Updating Order");
 
         prego = new PregoAdminAPI();
+        mDataBase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDataBase.getReference().child("OrderAdmin");
+        mDatabaseReference.keepSynced(true);
         status = findViewById(R.id.orderUpdateStatus);
         date=findViewById(R.id.updateDateReceived);
         time=findViewById(R.id.updateTimeReceived);
@@ -118,6 +125,7 @@ public class updateOrder extends AppCompatActivity {
     public void deleteOrder(View view){
         Toast.makeText(this,"You have Deleted Order no: "+ prego.getOrderIndex().get(orderID).getId().toString(),Toast.LENGTH_SHORT).show();
         prego.getOrderIndex().remove(orderID);
+        mDatabaseReference.child(String.valueOf(orderID)).removeValue();
         Intent I = new Intent(updateOrder.this,orderList.class);
         for(int y =0;y < prego.getOrderIndex().size();y++){
             prego.getOrderIndex().get(y).setId(Long.valueOf(y));
@@ -133,6 +141,7 @@ public class updateOrder extends AppCompatActivity {
         String state="";
         state=status.getText().toString();
         prego.getOrderIndex().get(orderID).setStatus(state);
+        mDatabaseReference.child(String.valueOf(orderID)).child("status").setValue(state);
         Intent I = new Intent(updateOrder.this,orderList.class);
         startActivity(I);
     }

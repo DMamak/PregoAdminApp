@@ -1,5 +1,6 @@
 package com.damian.pregoadminapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class addTopping extends AppCompatActivity {
     PregoAdminAPI prego;
     TextView toppingName;
     Button addNewTopping;
     TextView heading;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class addTopping extends AppCompatActivity {
         prego= new PregoAdminAPI();
         toppingName=findViewById(R.id.addNewToppingEditText);
         addNewTopping=findViewById(R.id.addNewToppingButton);
+
+
     }
 
     public void addNewTopping(View view) {
@@ -41,6 +47,7 @@ public class addTopping extends AppCompatActivity {
             Log.i("info", "addNewTopping: " + prego.getToppingsIndex().size());
             Intent I = new Intent(addTopping.this, toppingList.class);
             startActivity(I);
+
         }
     }
 

@@ -6,8 +6,12 @@ package com.damian.pregoadminapp.Models;
 
 public class Topping {
     public Long id =0L;
-    public static Long counter =0L;
+    private static Long counter = 0L;
     public String name;
+
+    public Topping(){
+
+    }
 
     public Topping(String name) {
         this.id=counter++;

@@ -22,11 +22,14 @@ import com.damian.pregoadminapp.Adapters.customItemClickListner;
 import com.damian.pregoadminapp.Adapters.toppingAdapterView;
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Topping;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class toppingList extends AppCompatActivity {
     PregoAdminAPI prego;
@@ -34,6 +37,8 @@ public class toppingList extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     long toppingId;
     TextView heading;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mDataBase;
 
 
     @Override
@@ -56,6 +61,9 @@ public class toppingList extends AppCompatActivity {
         });
 
         prego = new PregoAdminAPI();
+        mDataBase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDataBase.getReference().child("Toppings");
+        mDatabaseReference.keepSynced(true);
         toppings = findViewById(R.id.toppingRecyclerView);
         toppings.setHasFixedSize(true);
         toppings.setLayoutManager(new LinearLayoutManager(this));
@@ -113,6 +121,7 @@ public class toppingList extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(toppingList.this, "You have Succesfully Deleted " + prego.getToppingsIndex().get(((int)toppingid)).getName(), Toast.LENGTH_SHORT).show();
                prego.getToppingsIndex().remove(((int)toppingid));
+               mDatabaseReference.child(String.valueOf(toppingid)).removeValue();
                 setAdapter();
 
                 for(int y =0;y < prego.getToppingsIndex().size();y++){
@@ -132,7 +141,6 @@ public class toppingList extends AppCompatActivity {
         AlertDialog mDialog = builder.create();
         mDialog.show();
     }
-
 
 
 }

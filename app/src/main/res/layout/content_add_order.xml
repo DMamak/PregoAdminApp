@@ -8,17 +8,6 @@
     tools:context="com.damian.pregoadminapp.addOrder"
     tools:showIn="@layout/activity_add_order">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha=".2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/prego_pizza_logo_rgb" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"

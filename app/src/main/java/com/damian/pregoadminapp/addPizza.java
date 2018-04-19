@@ -2,6 +2,7 @@ package com.damian.pregoadminapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -31,6 +33,9 @@ public class addPizza extends AppCompatActivity {
     List<Integer> toppingsselected;
     List<Topping>toppingSelected;
     TextView heading;
+    ImageButton pizzaImage;
+    private static final int GALLERY_REQUEST = 1;
+    private Uri imageURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class addPizza extends AppCompatActivity {
         pizzaSize = findViewById(R.id.updatePizzaSizeToggleButton);
         toppingSelection = findViewById(R.id.Toppings);
         pizzaAdd = findViewById(R.id.addPizzaAddButton);
+        pizzaImage= findViewById(R.id.pizzaImage);
     }
 
     public void toppingFIller(View view){
@@ -98,20 +104,38 @@ public class addPizza extends AppCompatActivity {
         } else {
             Size = "16";
         }
-        Log.i("INFO", String.valueOf(Name.isEmpty()));
-        Log.i("INFO",String.valueOf(pizzaPrice.getText().toString().isEmpty()));
+
             if(Name.isEmpty() | pizzaPrice.getText().toString().isEmpty()){
                 Toast.makeText(this, "Missing Details.Please Fill them out", Toast.LENGTH_SHORT).show();
 
             }else {
                 double price = Double.parseDouble(pizzaPrice.getText().toString());
-                prego.addPizza(Name, Size, price, toppingSelected);
+                prego.addPizza(Name, Size, price, toppingSelected,imageURI.toString());
+
                 Intent In = new Intent(addPizza.this, pizzaList.class);
                 startActivity(In);
             }
 
     }
 
+    public void setPizzaImage(View view){
+
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent,GALLERY_REQUEST);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+
+             imageURI = data.getData();
+            pizzaImage.setImageURI(imageURI);
+
+        }
+    }
 }
 
 

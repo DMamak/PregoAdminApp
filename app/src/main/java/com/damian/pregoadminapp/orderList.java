@@ -18,6 +18,12 @@ import android.widget.TextView;
 import com.damian.pregoadminapp.Adapters.customItemClickListner;
 import com.damian.pregoadminapp.Adapters.orderAdapterView;
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
+import com.damian.pregoadminapp.Models.Pizza;
+import com.damian.pregoadminapp.Models.Topping;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class orderList extends AppCompatActivity {
     PregoAdminAPI prego;
@@ -25,6 +31,8 @@ public class orderList extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     long orderId;
     TextView heading;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mDataBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +54,9 @@ public class orderList extends AppCompatActivity {
         });
 
         prego = new PregoAdminAPI();
-        if(prego.getPizzaIndex().isEmpty() && prego.getToppingsIndex().isEmpty()) {
-            prego.toppingLoader();
-            prego.pizzaLoader();
-            prego.orderLoader();
-        }
+        mDataBase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDataBase.getReference().child("Toppings");
+        mDatabaseReference.keepSynced(true);
         orders =findViewById(R.id.orderRecyclerView);
         orders.setHasFixedSize(true);
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
@@ -96,16 +102,17 @@ public class orderList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setAdapter(){
-        adapter = new orderAdapterView( prego.getOrderIndex(),this, new customItemClickListner() {
-            @Override
-            public void onItemClick(View v, int position) {
-                orderId=prego.getPizzaIndex().get(position).getId();
-                Log.i("INFO", "onItemClick: order List" + orderId);
-                Intent myIntent = new Intent(orderList.this,updateOrder.class).putExtra("ID",orderId);
-                startActivity(myIntent);
-            }
-        });
-        orders.setAdapter(adapter);
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (prego.getToppingsIndex().size() == 0) {
+            prego.toppingLoader();
+            prego.pizzaLoader();
+            prego.orderLoader();
+
+        }
     }
+
 }
+

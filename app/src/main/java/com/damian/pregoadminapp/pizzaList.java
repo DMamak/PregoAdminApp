@@ -60,6 +60,7 @@ public class pizzaList extends AppCompatActivity {
 
         pizza.setLayoutManager(new LinearLayoutManager(this));
         setAdapter();
+
     }
 
     @Override
