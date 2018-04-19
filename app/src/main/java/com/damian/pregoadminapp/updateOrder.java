@@ -144,6 +144,7 @@ public class updateOrder extends AppCompatActivity {
         mDatabaseReference.child(String.valueOf(orderID)).child("status").setValue(state);
         Intent I = new Intent(updateOrder.this,orderList.class);
         startActivity(I);
+        finish();
     }
     public double totalCost() {
         double price = 0;

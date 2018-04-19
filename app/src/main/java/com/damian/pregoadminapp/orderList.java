@@ -55,7 +55,7 @@ public class orderList extends AppCompatActivity {
 
         prego = new PregoAdminAPI();
         mDataBase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mDataBase.getReference().child("Toppings");
+        mDatabaseReference = mDataBase.getReference().child("OrderAdmin");
         mDatabaseReference.keepSynced(true);
         orders =findViewById(R.id.orderRecyclerView);
         orders.setHasFixedSize(true);
@@ -69,10 +69,11 @@ public class orderList extends AppCompatActivity {
                 orderId=prego.getOrderIndex().get(position).getId();
                 Log.i("INFO", "onItemClick: order List" + orderId);
                 Intent myIntent = new Intent(orderList.this,updateOrder.class).putExtra("ID",orderId);
-                startActivity(myIntent);
+               startActivity(myIntent);
             }
         });
         orders.setAdapter(adapter);
+
 
     }
 

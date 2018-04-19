@@ -125,10 +125,12 @@ public class addPizza extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Uri downloadurl = taskSnapshot.getDownloadUrl();
                         prego.addPizza(Name, Size, price, toppingSelected,downloadurl.toString());
+                        Intent In = new Intent(addPizza.this, pizzaList.class);
+                        startActivity(In);
+
                     }
                 });
-                Intent In = new Intent(addPizza.this, pizzaList.class);
-                startActivity(In);
+
             }
 
     }

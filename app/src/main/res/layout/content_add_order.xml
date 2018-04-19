@@ -135,23 +135,39 @@
 
     <Button
         android:id="@+id/orderPizzaSelectorButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="8dp"
         android:onClick="pizzaFiller"
         android:text="Pizza Selector"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickOptionRadioGroup" />
 
     <Button
         android:id="@+id/orderPizzaAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="16dp"
         android:onClick="addOrder"
         android:text="@string/title_activity_add_order"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pizzaQuantityRecyclerView"
+        android:layout_width="377dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderPizzaAddButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderPizzaSelectorButton" />
 </android.support.constraint.ConstraintLayout>

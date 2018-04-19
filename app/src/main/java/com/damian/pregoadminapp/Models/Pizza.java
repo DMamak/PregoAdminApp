@@ -17,6 +17,7 @@ public class Pizza {
     private double price;
     private List<Topping> toppings;
     private String image;
+    private int quantity;
 
     public Pizza(){}
 
@@ -88,5 +89,13 @@ public class Pizza {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
