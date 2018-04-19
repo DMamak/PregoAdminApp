@@ -1,5 +1,6 @@
 package com.damian.pregoadminapp.Models;
 
+import android.net.Uri;
 import android.widget.ArrayAdapter;
 
 import java.util.List;
@@ -79,5 +80,13 @@ public class Pizza {
 
     public static void setCounter(Long counter) {
         Pizza.counter = counter;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

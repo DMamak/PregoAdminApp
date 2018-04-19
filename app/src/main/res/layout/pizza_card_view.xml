@@ -9,15 +9,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="384dp"
-        android:layout_height="174dp"
+        android:layout_width="0dp"
+        android:layout_height="510dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:layout_editor_absoluteY="13dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="485dp"
             android:padding="16dp">
 
             <RelativeLayout
@@ -28,28 +31,25 @@
                     android:id="@+id/namePizzaCardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerVertical="true"
                     android:text="Name" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/toppingsViewPizzaCardView"
-                    android:layout_alignBottom="@+id/toppingsViewPizzaCardView"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
+                    android:layout_marginBottom="119dp"
                     android:text="Toppings:" />
 
                 <TextView
                     android:id="@+id/pizzaCardViewSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
+                    android:layout_alignTop="@+id/namePizzaCardView"
                     android:layout_toEndOf="@+id/textView15"
-                    android:layout_toRightOf="@+id/textView15"
                     android:paddingLeft="10dp"
                     android:text="Size" />
 
@@ -57,12 +57,9 @@
                     android:id="@+id/toppingsViewPizzaCardView"
                     android:layout_width="235dp"
                     android:layout_height="100dp"
-                    android:layout_below="@+id/pizzaCardViewSize"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_toEndOf="@+id/textView4"
-                    android:layout_toRightOf="@+id/textView4"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/textView4"
+                    android:layout_marginEnd="45dp"
                     android:text="Text View"
                     android:textAlignment="center" />
 
@@ -70,20 +67,17 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/toppingsViewPizzaCardView"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/toppingsViewPizzaCardView"
-                    android:layout_marginLeft="58dp"
-                    android:layout_marginStart="58dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/namePizzaCardView"
+                    android:layout_marginStart="114dp"
                     android:text="Size" />
 
                 <TextView
                     android:id="@+id/pizzaCardViewPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/textView14"
-                    android:layout_toRightOf="@+id/textView14"
+                    android:layout_alignTop="@+id/namePizzaCardView"
+                    android:layout_toEndOf="@+id/toppingsViewPizzaCardView"
                     android:paddingLeft="10dp"
                     android:text="Price" />
 
@@ -92,9 +86,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/toppingsViewPizzaCardView"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignRight="@+id/toppingsViewPizzaCardView"
+                    android:layout_alignTop="@+id/namePizzaCardView"
                     android:text="Price€" />
+
+                <ImageView
+                    android:id="@+id/pizzaImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="center"
+                    app:srcCompat="@color/cardview_shadow_end_color" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

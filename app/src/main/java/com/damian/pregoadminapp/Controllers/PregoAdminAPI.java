@@ -1,12 +1,14 @@
 package com.damian.pregoadminapp.Controllers;
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 
 import com.damian.pregoadminapp.Models.Order;
 import com.damian.pregoadminapp.Models.Pizza;
 import com.damian.pregoadminapp.Models.Topping;
 import com.damian.pregoadminapp.toppingList;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,6 +42,7 @@ public class PregoAdminAPI
     private DatabaseReference mDatabaseReference;
     private FirebaseDatabase mDatabase;
     private StorageReference mStorageRef;
+    private Uri imageURI;
 
 
 
@@ -59,6 +63,7 @@ public class PregoAdminAPI
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Pizza");
 
         DatabaseReference newPizza = mDatabaseReference.child(String.valueOf(pizza.id));
+
         newPizza.setValue(pizza);
         return pizza;
     }

@@ -18,6 +18,10 @@ import android.widget.ToggleButton;
 
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Topping;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,7 @@ public class addPizza extends AppCompatActivity {
     ImageButton pizzaImage;
     private static final int GALLERY_REQUEST = 1;
     private Uri imageURI;
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class addPizza extends AppCompatActivity {
         toppingSelection = findViewById(R.id.Toppings);
         pizzaAdd = findViewById(R.id.addPizzaAddButton);
         pizzaImage= findViewById(R.id.pizzaImage);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
     }
 
     public void toppingFIller(View view){
@@ -96,8 +102,8 @@ public class addPizza extends AppCompatActivity {
 
     public void createPizza(View view) {
         boolean state = pizzaSize.isChecked();
-        String Name = pizzaName.getText().toString();
-        String Size;
+       final String Name = pizzaName.getText().toString();
+       final String Size;
 
         if (state) {
             Size = "12";
@@ -109,9 +115,18 @@ public class addPizza extends AppCompatActivity {
                 Toast.makeText(this, "Missing Details.Please Fill them out", Toast.LENGTH_SHORT).show();
 
             }else {
-                double price = Double.parseDouble(pizzaPrice.getText().toString());
-                prego.addPizza(Name, Size, price, toppingSelected,imageURI.toString());
+                final double price = Double.parseDouble(pizzaPrice.getText().toString());
 
+
+
+                StorageReference filepath = mStorageRef.child("Images").child(imageURI.getLastPathSegment());
+                filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Uri downloadurl = taskSnapshot.getDownloadUrl();
+                        prego.addPizza(Name, Size, price, toppingSelected,downloadurl.toString());
+                    }
+                });
                 Intent In = new Intent(addPizza.this, pizzaList.class);
                 startActivity(In);
             }
@@ -132,10 +147,14 @@ public class addPizza extends AppCompatActivity {
         if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
 
              imageURI = data.getData();
+
             pizzaImage.setImageURI(imageURI);
 
         }
     }
+
+
+
 }
 
 

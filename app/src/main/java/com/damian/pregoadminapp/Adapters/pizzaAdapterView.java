@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.damian.pregoadminapp.Models.Pizza;
 import com.damian.pregoadminapp.R;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -43,10 +46,12 @@ public class pizzaAdapterView extends RecyclerView.Adapter<pizzaAdapterView.myVi
     public void onBindViewHolder(myViewHolder holder, int position) {
         String details="";
         String name;
+        String imageURL = null;
         Pizza pizza = pizzaList.get(position);
         holder.price.setText(String.valueOf(pizza.getPrice()));
         holder.size.setText(pizza.getSize());
         holder.name.setText(pizza.getName());
+
 
 //        ArrayAdapter<Topping> arrayAdapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,pizza.getToppings());
 //        holder.toppings.setAdapter(arrayAdapter);
@@ -55,6 +60,8 @@ public class pizzaAdapterView extends RecyclerView.Adapter<pizzaAdapterView.myVi
             details= details+name+",";
         }
         holder.toppings.setText(details);
+        imageURL = pizza.getImage();
+        Picasso.get().load(imageURL).fit().into(holder.image);
     }
 
     @Override
@@ -68,6 +75,7 @@ public class pizzaAdapterView extends RecyclerView.Adapter<pizzaAdapterView.myVi
         public TextView name;
 //        public ListView toppings;
         public TextView toppings;
+        public ImageView image;
 
 
         public myViewHolder(View itemView) {
@@ -77,6 +85,7 @@ public class pizzaAdapterView extends RecyclerView.Adapter<pizzaAdapterView.myVi
             name=itemView.findViewById(R.id.namePizzaCardView);
 //            toppings=itemView.findViewById(R.id.orderPizzaListView);
             toppings=itemView.findViewById(R.id.toppingsViewPizzaCardView);
+            image = itemView.findViewById(R.id.pizzaImageView);
         }
     }
 
