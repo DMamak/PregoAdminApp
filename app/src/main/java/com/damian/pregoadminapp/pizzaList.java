@@ -59,6 +59,7 @@ public class pizzaList extends AppCompatActivity {
         pizza.setHasFixedSize(true);
 
         pizza.setLayoutManager(new LinearLayoutManager(this));
+
         setAdapter();
 
     }
@@ -95,8 +96,17 @@ public class pizzaList extends AppCompatActivity {
                 pizzaId=prego.getPizzaIndex().get(position).getId();
                 Intent myIntent = new Intent(pizzaList.this,updatePizza.class).putExtra("ID",pizzaId);
                 startActivity(myIntent);
+                finish();
             }
         });
+
         pizza.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
+
     }
 }
