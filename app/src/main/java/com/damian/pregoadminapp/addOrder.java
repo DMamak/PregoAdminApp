@@ -3,13 +3,8 @@ package com.damian.pregoadminapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.damian.pregoadminapp.Adapters.pizzaQuantityAdapterView;
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Pizza;
 
@@ -38,8 +32,6 @@ public class addOrder extends AppCompatActivity {
     List<Integer> pizzaselected;
     List<Pizza>pizzaSelected;
     TextView heading;
-    RecyclerView pizzaQuantitySelector;
-   RecyclerView.Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +48,6 @@ public class addOrder extends AppCompatActivity {
         pickUpMethod= findViewById(R.id.pickOptionRadioGroup);
         pizzaSelector=findViewById(R.id.orderPizzaSelectorButton);
         addOrder=findViewById(R.id.addPizzaAddButton);
-        pizzaQuantitySelector=findViewById(R.id.pizzaQuantityRecyclerView);
 
         date = findViewById(R.id.datePicker);
         date.setText(getCurrentDate());
@@ -116,10 +107,6 @@ public class addOrder extends AppCompatActivity {
                 mDialog.show();
             }
         });
-            pizzaQuantitySelector.setHasFixedSize(true);
-            pizzaQuantitySelector.setLayoutManager(new LinearLayoutManager(this));
-            adapter = new pizzaQuantityAdapterView(pizzaSelected,this);
-            pizzaQuantitySelector.setAdapter(adapter);
     }
 
     public void addOrder(View view){

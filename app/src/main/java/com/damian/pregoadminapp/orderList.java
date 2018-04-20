@@ -63,6 +63,7 @@ public class orderList extends AppCompatActivity {
 //        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 //        orders.setLayoutManager(gridLayoutManager);
         orders.setLayoutManager(new LinearLayoutManager(this));
+        Log.i("INFO",String.valueOf(prego.getOrderIndex().size()));
         adapter = new orderAdapterView(prego.getOrderIndex(),this, new customItemClickListner() {
             @Override
             public void onItemClick(View v, int position) {

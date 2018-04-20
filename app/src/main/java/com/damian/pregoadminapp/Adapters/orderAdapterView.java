@@ -2,6 +2,7 @@ package com.damian.pregoadminapp.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class orderAdapterView extends RecyclerView.Adapter<orderAdapterView.myVi
         this.context = context;
         this.orderList = orderList;
         this.listner=listner;
+        Log.i("INFO OrderAdapter", String.valueOf(orderList.size()) + "  " + String.valueOf(this.orderList.size()));
     }
 
     @Override
