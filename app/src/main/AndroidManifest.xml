@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/prego_pizza_logo_rgb"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashScreen"
+        <activity
+            android:name=".splashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +23,7 @@
         <activity
             android:name=".orderList"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".addTopping"
             android:label="@string/title_activity_add_topping"
@@ -50,11 +51,11 @@
         <activity
             android:name=".updateOrder"
             android:label="@string/title_activity_update_order"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".customerOrder"
             android:label="@string/title_activity_customer_order"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

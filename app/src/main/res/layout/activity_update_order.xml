@@ -34,7 +34,21 @@
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/deleteUpdateOrder"
+                android:layout_width="50sp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:background="@android:drawable/ic_menu_delete"
+                android:onClick="deleteOrder"
+                tools:layout_editor_absoluteX="44dp"
+                tools:layout_editor_absoluteY="435dp" />
+
+
         </android.support.v7.widget.Toolbar>
+
+
 
     </android.support.design.widget.AppBarLayout>
 

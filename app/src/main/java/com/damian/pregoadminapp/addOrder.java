@@ -20,7 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class addOrder extends AppCompatActivity {
+public class addOrder extends AppCompatActivity
+{
     PregoAdminAPI prego;
     RadioGroup paymentMethod;
     RadioGroup pickUpMethod;

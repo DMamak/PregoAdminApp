@@ -21,4 +21,10 @@
     <string name="total">Total €</string>
     <string name="name">Name:</string>
     <string name="title_activity_customer_order">Customer Order</string>
+    <string name="title_activity_navigationdrawer">navigationdrawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

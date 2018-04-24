@@ -57,7 +57,7 @@ public class customerAdapterView extends RecyclerView.Adapter<customerAdapterVie
         for(int i=0;i<request.getFoods().size();i++){
             pizzaName = request.getFoods().get(i).getProductName();
             pizzaQuantity = request.getFoods().get(i).getQuantity();
-            name = name + pizzaName + " " + "Quantity: " + pizzaQuantity + "\n";
+            name = name + "Pizza: "+  pizzaName + "  " + "Quantity: " + pizzaQuantity + "\n";
         }
 
         holder.name.setText(request.getName());
