@@ -55,8 +55,8 @@ public class pizzaAdapterView extends RecyclerView.Adapter<pizzaAdapterView.myVi
 
 //        ArrayAdapter<Topping> arrayAdapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,pizza.getToppings());
 //        holder.toppings.setAdapter(arrayAdapter);
-        for(int i = 0 ; i < pizza.getToppings().size();i++){
-            name = pizza.getToppings().get(i).getName();
+        for(int i = 0 ; i < pizza.getToppings1().size();i++){
+            name = pizza.getToppings1().get(i).getName();
             details= details+name+",";
         }
         holder.toppings.setText(details);

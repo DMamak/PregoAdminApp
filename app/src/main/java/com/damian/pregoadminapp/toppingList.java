@@ -22,6 +22,7 @@ import com.damian.pregoadminapp.Adapters.customItemClickListner;
 import com.damian.pregoadminapp.Adapters.toppingAdapterView;
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Topping;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -103,7 +104,6 @@ public class toppingList extends AppCompatActivity {
             public void onItemClick(View v, int position) {
                 toppingId = prego.getToppingsIndex().get(position).getId();
                 Log.i("INFO","onItemClick: " + toppingId);
-                Log.i("INFO","onItemClick: " + prego.getToppingsIndex().get(position).getCounter());
                 deleteToppingDialog(toppingId);
             }
         });
@@ -121,14 +121,14 @@ public class toppingList extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Toast.makeText(toppingList.this, "You have Succesfully Deleted " + prego.getToppingsIndex().get(((int)toppingid)).getName(), Toast.LENGTH_SHORT).show();
                prego.getToppingsIndex().remove(((int)toppingid));
-               mDatabaseReference.child(String.valueOf(toppingid)).removeValue();
-                setAdapter();
+               mDatabaseReference.child(String.valueOf(toppingid)).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                   @Override
+                   public void onSuccess(Void aVoid) {
+                       setAdapter();
+                   }
+               });
 
-                for(int y =0;y < prego.getToppingsIndex().size();y++){
-                    prego.getToppingsIndex().get(y).setId(Long.valueOf(y));
-                    Log.i("INFO", "onClick: " + prego.getToppingsIndex().get(y).getName()+" "+ prego.getToppingsIndex().get(y).getId());
-                }
-                prego.getToppingsIndex().get(prego.getPizzaIndex().size()).setCounter(prego.getToppingsIndex().get(prego.getPizzaIndex().size()).getCounter()-1);
+
                 Log.i("INFO", "onClick: "+prego.getToppingsIndex().get(prego.getPizzaIndex().size()).getCounter());
             }
         });

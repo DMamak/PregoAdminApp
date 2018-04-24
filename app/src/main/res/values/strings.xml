@@ -20,4 +20,5 @@
     <string name="time">Time:</string>
     <string name="total">Total €</string>
     <string name="name">Name:</string>
+    <string name="title_activity_customer_order">Customer Order</string>
 </resources>

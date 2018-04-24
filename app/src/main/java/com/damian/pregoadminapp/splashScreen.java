@@ -3,6 +3,7 @@ package com.damian.pregoadminapp;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import gr.net.maroulis.library.EasySplashScreen;
@@ -19,7 +20,8 @@ public class splashScreen extends AppCompatActivity {
             prego.toppingLoader();
             prego.pizzaLoader();
             prego.orderLoader();
-
+            prego.customerOrderLoader();
+            Log.i("INFO",String.valueOf(prego.getCustomerIndex().isEmpty()));
         }
     }
 

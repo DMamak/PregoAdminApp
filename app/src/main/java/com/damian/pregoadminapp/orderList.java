@@ -59,11 +59,9 @@ public class orderList extends AppCompatActivity {
         mDatabaseReference.keepSynced(true);
         orders =findViewById(R.id.orderRecyclerView);
         orders.setHasFixedSize(true);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
-//        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        orders.setLayoutManager(gridLayoutManager);
         orders.setLayoutManager(new LinearLayoutManager(this));
-        Log.i("INFO",String.valueOf(prego.getOrderIndex().size()));
+
+        Log.i("INFO",String.valueOf(prego.getCustomerIndex().size()));
         adapter = new orderAdapterView(prego.getOrderIndex(),this, new customItemClickListner() {
             @Override
             public void onItemClick(View v, int position) {
@@ -98,6 +96,8 @@ public class orderList extends AppCompatActivity {
             case R.id.toppingListMenu : startActivity(new Intent(this,toppingList.class));
             break;
             case R.id.pizzaListMenu : startActivity(new Intent(this, pizzaList.class));
+            break;
+            case R.id.customerOrderList:startActivity(new Intent(this,customerOrder.class));
             break;
         }
 

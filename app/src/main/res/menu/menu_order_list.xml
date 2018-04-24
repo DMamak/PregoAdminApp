@@ -8,9 +8,15 @@
         android:title="List of Toppings"
         app:showAsAction="never" />
     <item
-        android:id="@+id/pizzaListMenu"
-        android:orderInCategory="100"
-        android:title="List of Pizzas"
-        app:showAsAction="never"/>
+    android:id="@+id/pizzaListMenu"
+    android:orderInCategory="100"
+    android:title="List of Pizzas"
+    app:showAsAction="never"/>
+
+    <item
+    android:id="@+id/customerOrderList"
+    android:orderInCategory="100"
+    android:title="List of Customer Orders"
+    app:showAsAction="never"/>
 
 </menu>
