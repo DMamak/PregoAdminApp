@@ -18,7 +18,7 @@ public class Pizza {
     private List<Topping> toppings;
     private String image;
     private int quantity;
-    private String toppings1 ="";
+    private String toppings1;
     private String menuId;
 
     public Pizza(){}
@@ -35,13 +35,12 @@ public class Pizza {
 
     public Pizza(String image,String name,double price,String toppings){
         this.image = image;
-        this.id = counter++;
         this.name = name;
         this.price = price;
         this.toppings1 = toppings;
         this.menuId = "01";
-
     }
+
 
     public Long getId() {
         return id;
@@ -127,4 +126,5 @@ public class Pizza {
     public void setMenuId(String menuId) {
         this.menuId = menuId;
     }
+
 }

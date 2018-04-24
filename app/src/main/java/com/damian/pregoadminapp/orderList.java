@@ -105,16 +105,5 @@ public class orderList extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (prego.getToppingsIndex().size() == 0) {
-            prego.toppingLoader();
-            prego.pizzaLoader();
-            prego.orderLoader();
-
-        }
-    }
-
 }
 
