@@ -18,6 +18,8 @@ public class Pizza {
     private List<Topping> toppings;
     private String image;
     private int quantity;
+    private String toppings1 ="";
+    private String menuId;
 
     public Pizza(){}
 
@@ -28,6 +30,17 @@ public class Pizza {
         this.price = price;
         this.toppings=toppings;
         this.image = image;
+
+    }
+
+    public Pizza(String image,String name,double price,String toppings){
+        this.image = image;
+        this.id = counter++;
+        this.name = name;
+        this.price = price;
+        this.toppings1 = toppings;
+        this.menuId = "01";
+
     }
 
     public Long getId() {
@@ -97,5 +110,21 @@ public class Pizza {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getToppings1() {
+        return toppings1;
+    }
+
+    public void setToppings1(String toppings1) {
+        this.toppings1 = toppings1;
+    }
+
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 }

@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.login.LoginException;
+
 /**
  * Created by damia on 08/03/2018.
  */
@@ -40,6 +42,7 @@ public class PregoAdminAPI
     public static ArrayList<Pizza> pizzaIndex = new ArrayList<>();
     private static ArrayList<Order> orderIndex = new ArrayList<>();
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference1;
     private FirebaseDatabase mDatabase;
     private StorageReference mStorageRef;
     private Uri imageURI;
@@ -60,11 +63,24 @@ public class PregoAdminAPI
 
     public Pizza addPizza(String name,String size,double price,List<Topping> toppingList,String image){
         Pizza pizza = new Pizza(name,size,price,toppingList,image);
+        int toppinglength = 0;
+        String topping = "";
+        toppinglength = pizza.getToppings().size();
+        for(int i = 0; i < toppinglength;i++){
+
+            topping = topping + " " + pizza.getToppings().get(i).name;
+
+        }
+        Log.i("INFO", topping);
+        Pizza pizza1 = new Pizza(image,name,price,topping);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Pizza");
 
         DatabaseReference newPizza = mDatabaseReference.child(String.valueOf(pizza.id));
-
         newPizza.setValue(pizza);
+        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("menu");
+        DatabaseReference newPizza1 = mDatabaseReference1.child(String.valueOf(pizza.id));
+        newPizza1.setValue(pizza1);
+
         return pizza;
     }
 

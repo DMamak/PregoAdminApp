@@ -40,6 +40,7 @@ public class updatePizza extends AppCompatActivity {
     ImageButton imagebutton;
     TextView heading;
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference1;
     private FirebaseDatabase mDataBase;
     private static final int GALLERY_REQUEST = 1;
     private Uri imageURI;
@@ -61,6 +62,7 @@ public class updatePizza extends AppCompatActivity {
         mDataBase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDataBase.getReference().child("Pizza");
         mDatabaseReference.keepSynced(true);
+        mDatabaseReference1 = mDataBase.getReference().child("menu");
         updateName=findViewById(R.id.updatePizzaNameEditText);
         updatePrice=findViewById(R.id.updatePizzaPriceEditText);
         updateSize=findViewById(R.id.updatePizzaSizeToggleButton);
@@ -131,6 +133,7 @@ public class updatePizza extends AppCompatActivity {
         Toast.makeText(this, "You Have Deleted "+prego.getPizzaIndex().get(pizzaID).getName(), Toast.LENGTH_SHORT).show();
         prego.getPizzaIndex().remove(pizzaID);
         mDatabaseReference.child(String.valueOf(pizzaID)).removeValue();
+        mDatabaseReference1.child(String.valueOf(pizzaID)).removeValue();
         Intent I = new Intent(updatePizza.this, pizzaList.class);
         for (int y = 0; y < prego.getPizzaIndex().size(); y++) {
             prego.getPizzaIndex().get(y).setId(Long.valueOf(y));
