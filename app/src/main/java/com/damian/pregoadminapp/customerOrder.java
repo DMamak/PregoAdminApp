@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -76,6 +78,32 @@ public class customerOrder extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_customer_order, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        switch (item.getItemId())
+        {
+            case R.id.pizzaListMenu : startActivity(new Intent(this, pizzaList.class));
+                break;
+            case R.id.orderListMenu : startActivity(new Intent(this, orderList.class));
+                break;
+            case R.id.toppingListMenu : startActivity(new Intent(this,toppingList.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void statusDialog(final int x){
         AlertDialog.Builder builder = new AlertDialog.Builder(customerOrder.this);

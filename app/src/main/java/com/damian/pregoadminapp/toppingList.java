@@ -93,6 +93,8 @@ public class toppingList extends AppCompatActivity {
                 break;
             case R.id.orderListMenu : startActivity(new Intent(this, orderList.class));
             break;
+            case R.id.customerOrderList:startActivity(new Intent(this,customerOrder.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);

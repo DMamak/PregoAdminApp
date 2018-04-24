@@ -90,6 +90,7 @@ public class updatePizza extends AppCompatActivity {
 
     public void updateOrder(View view) {
         mProgress.setMessage("Updating Pizza...");
+
         boolean state = updateSize.isChecked();
         String Size;
         if (state) {
@@ -98,7 +99,7 @@ public class updatePizza extends AppCompatActivity {
             Size = "16";
         }
         final Pizza pizza = prego.getPizzaIndex().get(pizzaID);
-
+        String image = pizza.getImage();
 
         if (updateName.getText().toString().isEmpty() | updatePrice.getText().toString().isEmpty()) {
             Toast.makeText(this, "Missing Details.Please Fill them out", Toast.LENGTH_SHORT).show();
@@ -106,6 +107,7 @@ public class updatePizza extends AppCompatActivity {
             pizza.setName(updateName.getText().toString());
             pizza.setSize(Size);
             pizza.setPrice(Double.valueOf(updatePrice.getText().toString()));
+            pizza.setImage(image);
                    StorageReference filepath = mStorageRef.child("Images").child(imageURI.getLastPathSegment());
 
                    filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

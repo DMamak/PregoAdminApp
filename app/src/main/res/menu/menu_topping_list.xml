@@ -14,4 +14,10 @@
         android:orderInCategory="100"
         android:title="List of Orders"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/customerOrderList"
+        android:orderInCategory="100"
+        android:title="List of Customer Orders"
+        app:showAsAction="never"/>
 </menu>
