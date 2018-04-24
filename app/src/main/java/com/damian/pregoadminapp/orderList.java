@@ -60,15 +60,14 @@ public class orderList extends AppCompatActivity {
         orders =findViewById(R.id.orderRecyclerView);
         orders.setHasFixedSize(true);
         orders.setLayoutManager(new LinearLayoutManager(this));
-
-        Log.i("INFO",String.valueOf(prego.getCustomerIndex().size()));
+        ;
         adapter = new orderAdapterView(prego.getOrderIndex(),this, new customItemClickListner() {
             @Override
             public void onItemClick(View v, int position) {
                 orderId=prego.getOrderIndex().get(position).getId();
-                Log.i("INFO", "onItemClick: order List" + orderId);
                 Intent myIntent = new Intent(orderList.this,updateOrder.class).putExtra("ID",orderId);
                startActivity(myIntent);
+               finish();
             }
         });
         orders.setAdapter(adapter);
