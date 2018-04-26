@@ -135,6 +135,7 @@ public class updateOrder extends AppCompatActivity {
         }
 
         startActivity(I);
+        finish();
     }
 
     public void updateOrder(View view){

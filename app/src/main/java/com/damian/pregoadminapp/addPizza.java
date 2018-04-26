@@ -42,6 +42,7 @@ public class addPizza extends AppCompatActivity {
     private Uri imageURI;
     private StorageReference mStorageRef;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,18 +60,11 @@ public class addPizza extends AppCompatActivity {
         pizzaAdd = findViewById(R.id.addPizzaAddButton);
         pizzaImage= findViewById(R.id.pizzaImage);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        arrayInilizator();
     }
 
     public void toppingFIller(View view){
-        toppings = new String[prego.getToppingsIndex().size()];
-        for(int i =0; i<toppings.length;i++){
-            toppings[i] = prego.getToppingsIndex().get(i).getName();
-        }
-        toppingsselected = new ArrayList<>();
-        toppingSelected = new ArrayList<>();
-        toppingSelection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(addPizza.this);
                 mBuilder.setTitle("Topping Selection")
                         .setMultiChoiceItems(toppings, null, new DialogInterface.OnMultiChoiceClickListener() {
@@ -95,8 +89,8 @@ public class addPizza extends AppCompatActivity {
                 });
                 AlertDialog mDialog = mBuilder.create();
                 mDialog.show();
-            }
-        });
+
+
     }
 
 
@@ -110,23 +104,21 @@ public class addPizza extends AppCompatActivity {
         } else {
             Size = "16";
         }
-
-            if(Name.isEmpty() | pizzaPrice.getText().toString().isEmpty()){
+        Log.i("INFO", String.valueOf(toppingSelected.size()));
+            if(Name.isEmpty() | pizzaPrice.getText().toString().isEmpty()| imageURI ==null | toppingSelected.isEmpty() ){
                 Toast.makeText(this, "Missing Details.Please Fill them out", Toast.LENGTH_SHORT).show();
 
             }else {
                 final double price = Double.parseDouble(pizzaPrice.getText().toString());
-
-
-
                 StorageReference filepath = mStorageRef.child("Images").child(imageURI.getLastPathSegment());
                 filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri downloadurl = taskSnapshot.getDownloadUrl();
+                       final Uri downloadurl = taskSnapshot.getDownloadUrl();
                         prego.addPizza(Name, Size, price, toppingSelected,downloadurl.toString());
                         Intent In = new Intent(addPizza.this, pizzaList.class);
                         startActivity(In);
+                        finish();
 
                     }
                 });
@@ -153,6 +145,15 @@ public class addPizza extends AppCompatActivity {
             pizzaImage.setImageURI(imageURI);
 
         }
+    }
+
+    public void arrayInilizator(){
+        toppings = new String[prego.getToppingsIndex().size()];
+        for(int i =0; i<toppings.length;i++){
+            toppings[i] = prego.getToppingsIndex().get(i).getName();
+        }
+        toppingsselected = new ArrayList<>();
+        toppingSelected = new ArrayList<>();
     }
 
 

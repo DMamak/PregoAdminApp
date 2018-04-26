@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/textView15"
-                    android:layout_toEndOf="@+id/textView15"
+                    android:layout_centerHorizontal="true"
                     android:paddingLeft="10dp"
                     android:text="Size" />
 
@@ -86,8 +86,8 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/toppingsViewPizzaCardView"
                     android:layout_alignTop="@+id/namePizzaCardView"
+                    android:layout_toStartOf="@+id/pizzaCardViewPrice"
                     android:text="Price€" />
 
                 <ImageView
