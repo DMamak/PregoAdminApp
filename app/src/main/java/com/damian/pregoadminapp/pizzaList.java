@@ -98,7 +98,7 @@ public class pizzaList extends AppCompatActivity {
                 pizzaId=prego.getPizzaIndex().get(position).getId();
                 Intent myIntent = new Intent(pizzaList.this,updatePizza.class).putExtra("ID",pizzaId);
                 startActivity(myIntent);
-                finish();
+
             }
         });
 

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.damian.pregoadminapp.Controllers.PregoAdminAPI;
 import com.damian.pregoadminapp.Models.Pizza;
@@ -31,7 +32,7 @@ public class addOrder extends AppCompatActivity
     EditText time;
     String[] pizzas;
     List<Integer> pizzaselected;
-    List<Pizza>pizzaSelected;
+    List<Pizza>pizzaSelected = new ArrayList<>();
     TextView heading;
 
     @Override
@@ -78,10 +79,7 @@ public class addOrder extends AppCompatActivity
             pizzas[i] = prego.getPizzaIndex().get(i).getName();
         }
         pizzaselected = new ArrayList<>();
-        pizzaSelected = new ArrayList<>();
-        pizzaSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(addOrder.this);
                 mBuilder.setTitle("Topping Selection")
                         .setMultiChoiceItems(pizzas, null, new DialogInterface.OnMultiChoiceClickListener() {
@@ -106,29 +104,36 @@ public class addOrder extends AppCompatActivity
                 });
                 AlertDialog mDialog = mBuilder.create();
                 mDialog.show();
-            }
-        });
+
+
     }
 
-    public void addOrder(View view){
-        String method="";
-        String method2="";
+    public void addOrder(View view) {
+        String method = "";
+        String method2 = "";
         int radioID = paymentMethod.getCheckedRadioButtonId();
-        int radioId2 =pickUpMethod.getCheckedRadioButtonId();
-        if(radioID == R.id.collection){
+        int radioId2 = pickUpMethod.getCheckedRadioButtonId();
+        if (radioID == R.id.collection) {
             method = "Collection";
-        }else{
-            method="Delivery";
+        } else {
+            method = "Delivery";
         }
-        if (radioId2 == R.id.cardPayment){
+        if (radioId2 == R.id.cardPayment) {
             method2 = "Card";
-        }else{
+        } else {
             method2 = "Cash";
         }
         String dateReceived = date.getText().toString();
         String timeReceived = time.getText().toString();
-        prego.addOrder(dateReceived,timeReceived,method,method2,pizzaSelected);
-        Intent In = new Intent(addOrder.this, orderList.class);
-        startActivity(In);
+        if (dateReceived.isEmpty() | timeReceived.isEmpty() | method.isEmpty() | method2.isEmpty() | pizzaSelected.isEmpty()) {
+            Toast.makeText(this, "Missing Details.Please fill them in !", Toast.LENGTH_SHORT).show();
+        } else {
+
+
+            prego.addOrder(dateReceived, timeReceived, method, method2, pizzaSelected);
+            Intent In = new Intent(addOrder.this, orderList.class);
+            startActivity(In);
+            finish();
+        }
     }
 }

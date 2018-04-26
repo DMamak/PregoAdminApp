@@ -35,7 +35,7 @@ public class addPizza extends AppCompatActivity {
     Button toppingSelection;
     String[] toppings;
     List<Integer> toppingsselected;
-    List<Topping>toppingSelected;
+    List<Topping>toppingSelected = new ArrayList<>();
     TextView heading;
     ImageButton pizzaImage;
     private static final int GALLERY_REQUEST = 1;
@@ -60,10 +60,14 @@ public class addPizza extends AppCompatActivity {
         pizzaAdd = findViewById(R.id.addPizzaAddButton);
         pizzaImage= findViewById(R.id.pizzaImage);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        arrayInilizator();
     }
 
     public void toppingFIller(View view){
+        toppings = new String[prego.getToppingsIndex().size()];
+        for(int i =0; i<toppings.length;i++){
+            toppings[i] = prego.getToppingsIndex().get(i).getName();
+        }
+        toppingsselected = new ArrayList<>();
 
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(addPizza.this);
                 mBuilder.setTitle("Topping Selection")
@@ -147,14 +151,6 @@ public class addPizza extends AppCompatActivity {
         }
     }
 
-    public void arrayInilizator(){
-        toppings = new String[prego.getToppingsIndex().size()];
-        for(int i =0; i<toppings.length;i++){
-            toppings[i] = prego.getToppingsIndex().get(i).getName();
-        }
-        toppingsselected = new ArrayList<>();
-        toppingSelected = new ArrayList<>();
-    }
 
 
 

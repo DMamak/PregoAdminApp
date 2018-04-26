@@ -45,7 +45,6 @@ public class updatePizza extends AppCompatActivity {
     private static final int GALLERY_REQUEST = 1;
     private Uri imageURI;
     private StorageReference mStorageRef;
-    private ProgressDialog mProgress;
 
 
 
@@ -72,7 +71,7 @@ public class updatePizza extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         pizzaId = getIntent().getLongExtra("ID",pizzaId);
         pizzaID=(int)pizzaId ;
-        mProgress = new ProgressDialog(this);
+
 
 
         updateName.setText(prego.getPizzaIndex().get(pizzaID).getName());
@@ -89,7 +88,6 @@ public class updatePizza extends AppCompatActivity {
     }
 
     public void updateOrder(View view) {
-        mProgress.setMessage("Updating Pizza...");
 
         boolean state = updateSize.isChecked();
         String Size;
@@ -108,25 +106,39 @@ public class updatePizza extends AppCompatActivity {
             pizza.setSize(Size);
             pizza.setPrice(Double.valueOf(updatePrice.getText().toString()));
             pizza.setImage(image);
-                   StorageReference filepath = mStorageRef.child("Images").child(imageURI.getLastPathSegment());
 
-                   filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                       @Override
-                       public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                           Uri downloadurl = taskSnapshot.getDownloadUrl();
-                           pizza.setImage(downloadurl.toString());
+            StorageReference filepath = mStorageRef.child("Images").child(imageURI.getLastPathSegment());
 
-                           mDatabaseReference.child(String.valueOf(pizzaID)).setValue(pizza).addOnSuccessListener(new OnSuccessListener<Void>() {
-                               @Override
-                               public void onSuccess(Void aVoid) {
-                                   mProgress.dismiss();
-                               }
-                           });
+            if(Uri.parse(prego.getPizzaIndex().get(pizzaID).getImage()).equals(imageURI)){
 
-                           Intent I = new Intent(updatePizza.this, pizzaList.class);
-                           startActivity(I);
-                       }
-                   });
+                mDatabaseReference.child(String.valueOf(pizzaID)).setValue(pizza);
+                Intent I = new Intent(updatePizza.this, pizzaList.class);
+                startActivity(I);
+                finish();
+
+            }else {
+
+                filepath.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Uri downloadurl = taskSnapshot.getDownloadUrl();
+                        pizza.setImage(downloadurl.toString());
+
+                        mDatabaseReference.child(String.valueOf(pizzaID)).setValue(pizza).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        });
+
+
+                    }
+                });
+                Intent I = new Intent(updatePizza.this, pizzaList.class);
+                startActivity(I);
+                finish();
+
+            }
 
         }
     }
@@ -146,6 +158,7 @@ public class updatePizza extends AppCompatActivity {
             //        Log.i("INFO", "onClick: "+prego.getPizzaIndex().get(prego.getPizzaIndex().size()).getCounter());
 
             startActivity(I);
+        finish();
 
         }
 
