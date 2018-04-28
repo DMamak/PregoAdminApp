@@ -3,6 +3,7 @@ package com.damian.pregoadminapp.Models;
 import android.net.Uri;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,16 +20,18 @@ public class Pizza {
     private String image;
     private String toppings;
     private String menuId;
+    private ArrayList<Boolean> ischecked;
 
     public Pizza(){}
 
-    public Pizza(String name, String size ,double price,List<Topping> toppings,String image) {
+    public Pizza(String name, String size ,double price,List<Topping> toppings,String image,ArrayList<Boolean> ischecked) {
         this.id = counter++;
         this.name = name;
         this.size = size;
         this.price = price;
         this.toppings1=toppings;
         this.image = image;
+        this.ischecked = ischecked;
 
     }
 
@@ -118,4 +121,11 @@ public class Pizza {
         this.menuId = menuId;
     }
 
+    public ArrayList<Boolean> getIschecked() {
+        return ischecked;
+    }
+
+    public void setIschecked(ArrayList<Boolean> ischecked) {
+        this.ischecked = ischecked;
+    }
 }

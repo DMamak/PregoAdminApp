@@ -2,6 +2,7 @@ package com.damian.pregoadminapp.Controllers;
 
 import android.net.Uri;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.damian.pregoadminapp.Models.Order;
 import com.damian.pregoadminapp.Models.Pizza;
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,8 +58,13 @@ public class PregoAdminAPI {
         return customerIndex;
     }
 
-    public Pizza addPizza(String name, String size, double price, List<Topping> toppingList, String image) {
-        Pizza pizza = new Pizza(name, size, price, toppingList, image);
+    public Pizza addPizza(String name, String size, double price, List<Topping> toppingList, String image,boolean[]ischecked) {
+        ArrayList<Boolean> isChecked = new ArrayList<>();
+        for(int v =0; v < ischecked.length;v++) {
+                isChecked.add(v,Boolean.valueOf(ischecked[v]));
+        }
+
+        Pizza pizza = new Pizza(name,size,price,toppingList,image,isChecked);
         int toppinglength = 0;
         String topping = "";
         toppinglength = pizza.getToppings1().size();

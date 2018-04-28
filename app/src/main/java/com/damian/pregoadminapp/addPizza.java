@@ -41,6 +41,7 @@ public class addPizza extends AppCompatActivity {
     private static final int GALLERY_REQUEST = 1;
     private Uri imageURI;
     private StorageReference mStorageRef;
+    boolean [] checkedItems;
 
 
     @Override
@@ -60,6 +61,7 @@ public class addPizza extends AppCompatActivity {
         pizzaAdd = findViewById(R.id.addPizzaAddButton);
         pizzaImage= findViewById(R.id.pizzaImage);
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        checkedItems = new boolean[prego.getToppingsIndex().size()];
     }
 
     public void toppingFIller(View view){
@@ -67,15 +69,18 @@ public class addPizza extends AppCompatActivity {
         for(int i =0; i<toppings.length;i++){
             toppings[i] = prego.getToppingsIndex().get(i).getName();
         }
+
         toppingsselected = new ArrayList<>();
+        Log.i("INFO", String.valueOf(checkedItems.length));
 
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(addPizza.this);
                 mBuilder.setTitle("Topping Selection")
-                        .setMultiChoiceItems(toppings, null, new DialogInterface.OnMultiChoiceClickListener() {
+                        .setMultiChoiceItems(toppings, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
                                 if( isChecked ){
                                     toppingsselected.add(i);
+
                                 }else {
                                     toppingsselected.remove(Integer.valueOf(i));
                                 }
@@ -87,6 +92,7 @@ public class addPizza extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for(int z =0; z < toppingsselected.size();z++){
                             toppingSelected.add(prego.getToppingsIndex().get(toppingsselected.get(z)));
+
                         }
 
                     }
@@ -119,7 +125,7 @@ public class addPizza extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                        final Uri downloadurl = taskSnapshot.getDownloadUrl();
-                        prego.addPizza(Name, Size, price, toppingSelected,downloadurl.toString());
+                        prego.addPizza(Name, Size, price, toppingSelected,downloadurl.toString(),checkedItems);
                         Intent In = new Intent(addPizza.this, pizzaList.class);
                         startActivity(In);
                         finish();
