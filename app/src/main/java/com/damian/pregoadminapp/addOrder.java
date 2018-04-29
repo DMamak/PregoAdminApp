@@ -34,6 +34,7 @@ public class addOrder extends AppCompatActivity
     List<Integer> pizzaselected;
     List<Pizza>pizzaSelected = new ArrayList<>();
     TextView heading;
+    boolean [] checkedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class addOrder extends AppCompatActivity
 
         time = findViewById(R.id.timePicker);
         time.setText(getCurrentTime());
+        checkedItems = new boolean[prego.getPizzaIndex().size()];
 
 }
 
@@ -82,7 +84,7 @@ public class addOrder extends AppCompatActivity
 
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(addOrder.this);
                 mBuilder.setTitle("Topping Selection")
-                        .setMultiChoiceItems(pizzas, null, new DialogInterface.OnMultiChoiceClickListener() {
+                        .setMultiChoiceItems(pizzas, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
                                 if( isChecked ){
